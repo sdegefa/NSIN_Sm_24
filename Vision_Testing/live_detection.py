@@ -14,7 +14,7 @@ def cam(camID):
     cap = cv2.VideoCapture(camID)
 
     # Load YOLOv8 model
-    model = YOLO('yolov8n.pt')
+    model = YOLO('thermal_yolov8n_6_4_24.pt')
 
     # Loop for fetching frames
     while True:
