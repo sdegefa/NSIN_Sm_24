@@ -60,6 +60,9 @@ def cam_loop(camID):
         # Add compass directions and object angles to the plot
         img_ann = dir_ann(results[0].plot(), compass_directions, object_angles, top_lefts, depths)
 
+        # Concat annotated image with disparity image
+        img_ann = np.concatenate((img_ann, disparity_img), axis=1)
+
         cv2.imshow('Cam' + str(camID), img_ann)
 
         if (cv2.waitKey(30) == 27):  # ESC key to break loop
@@ -136,8 +139,13 @@ def disparity_calculation(results):
     # For this script, using the same camera input with the image offset to emulate a stereo camera
     im1 = results[0].orig_img
     im2 = results[0].orig_img
-    im2 = transforms.functional.affine(torch.from_numpy(im2), angle=0, translate=(30, 0), scale=1, shear=0)
-    im2 = im2.numpy()
+    im2 = torch.tensor(im2, dtype=torch.float32).permute(2, 0, 1)
+    im2 = transforms.functional.affine(im2, angle=0, translate=(30, 0), scale=1, shear=0)
+    im2 = im2.permute(1, 2, 0).numpy().astype(np.uint8)
+
+    # show images
+    # cv2.imshow('Stereo Images', im2)
+    # cv2.waitKey(0)
 
     # Calculate disparity
     disparity = hitnet_depth(im1, im2)
