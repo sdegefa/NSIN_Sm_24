@@ -28,7 +28,7 @@ def main():
     cam_loop(0)
 
 def detect(frame):
-    results = model(frame, device=0)
+    results = model.predict(frame, device=0, classes=[0])
     return results
 
 def cam_loop(camID):
