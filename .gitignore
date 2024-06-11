@@ -2,4 +2,5 @@ Model Optimization/datasets
 Model Optimization/runs/FLIR_runs/Blank Model/nIR_6_10_24
 Model Optimization/runs/FLIR_runs/Pretrained/pIR_6_11_242
 Model Optimization/runs/FLIR_runs/Pretrained/pIR_6_11_24
+Model Optimization/runs/RGB_and_IR_runs/Pretrained/pRGB_6_11_24
 Vision_Testing/runs
